@@ -1,7 +1,7 @@
 # SOME COMMON NAMES:
 locals {
   operation_cluster_name         = "${var.product_domain_name}-${var.environment_type}-ops.${var.k8s_cluster_name_postfix}"
-  operation_kops_state_s3_bucket = "kops-${var.operation_aws_account_number}-${var.region}-${var.product_domain_name}-${var.environment_type}"
+  operation_kops_state_s3_bucket = "kops-${var.operation_aws_account_number}-${var.region}-${var.product_domain_name}-${var.environment_type}-ops"
 }
 
 ##############################################################################
