@@ -54,3 +54,33 @@ EOF
 
   filename = "${var.ouputs_directory}/README.md"
 }
+
+##############################################################################
+# CREATE IN AWS:
+resource "aws_iam_policy" "iam_policies_kops-cluster-masters-application" {
+  count  = "${var.auto_IAM_mode}"
+  name   = "masters.${local.application_cluster_name}"
+  path   = "${var.auto_IAM_path_prefix}"
+  policy = "${module.common_policies.iam_policies_kops-cluster-masters}"
+}
+
+resource "aws_iam_policy" "iam_policies_kops-cluster-masters-extra-application" {
+  count  = "${var.auto_IAM_mode}"
+  name   = "masters_extra.${local.application_cluster_name}"
+  path   = "${var.auto_IAM_path_prefix}"
+  policy = "${module.common_policies.iam_policies_kops-cluster-masters-extra}"
+}
+
+resource "aws_iam_policy" "iam_policies_kops-cluster-nodes-application" {
+  count  = "${var.auto_IAM_mode}"
+  name   = "nodes.${local.application_cluster_name}"
+  path   = "${var.auto_IAM_path_prefix}"
+  policy = "${module.common_policies.iam_policies_kops-cluster-nodes}"
+}
+
+resource "aws_iam_policy" "allow_cross_account_logging" {
+  count  = "${var.auto_IAM_mode}"
+  name   = "logging_kinesis_cross_account.${local.operation_cluster_name}"
+  path   = "${var.auto_IAM_path_prefix}"
+  policy = "${data.aws_iam_policy_document.allow_cross_account_application_logging.json}"
+}

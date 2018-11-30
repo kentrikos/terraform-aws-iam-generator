@@ -36,3 +36,13 @@ variable "logs_not_resource" {
   default     = []
   type        = "list"
 }
+
+variable "auto_IAM_mode" {
+  description = "Create IAM Policy in AWS(default false)"
+  default     = false
+}
+
+variable "auto_IAM_path_prefix" {
+  description = "IAM path prefix for auto_IAM_mode"
+  default     = "/"
+}
