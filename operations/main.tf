@@ -56,27 +56,27 @@ EOF
 resource "aws_iam_policy" "iam_policies_kops-cluster-masters-operation" {
   count  = "${var.auto_IAM_mode}"
   name   = "masters.${local.operation_cluster_name}"
-  path   = "${var.auto_IAM_path_prefix}"
+  path   = "${var.auto_IAM_path}"
   policy = "${module.common_policies.iam_policies_kops-cluster-masters}"
 }
 
 resource "aws_iam_policy" "iam_policies_kops-cluster-masters-extra-operation" {
   count  = "${var.auto_IAM_mode}"
   name   = "masters_extra.${local.operation_cluster_name}"
-  path   = "${var.auto_IAM_path_prefix}"
+  path   = "${var.auto_IAM_path}"
   policy = "${module.common_policies.iam_policies_kops-cluster-masters-extra}"
 }
 
 resource "aws_iam_policy" "iam_policies_kops-cluster-nodes-operation" {
   count  = "${var.auto_IAM_mode}"
   name   = "nodes.${local.operation_cluster_name}"
-  path   = "${var.auto_IAM_path_prefix}"
+  path   = "${var.auto_IAM_path}"
   policy = "${module.common_policies.iam_policies_kops-cluster-nodes}"
 }
 
 resource "aws_iam_policy" "AssumeKopsCrossAccount" {
   count  = "${var.auto_IAM_mode}"
   name   = "AssumeKopsCrossAccount"
-  path   = "${var.auto_IAM_path_prefix}"
+  path   = "${var.auto_IAM_path}"
   policy = "${data.aws_iam_policy_document.AssumeKopsCrossAccount.json}"
 }

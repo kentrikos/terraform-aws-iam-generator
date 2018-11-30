@@ -38,11 +38,11 @@ variable "logs_not_resource" {
 }
 
 variable "auto_IAM_mode" {
-  description = "Create IAM Policy in AWS(default false)"
+  description = "Create IAM Policies in AWS(default false)"
   default     = false
 }
 
-variable "auto_IAM_path_prefix" {
-  description = "IAM path prefix for auto_IAM_mode"
+variable "auto_IAM_path" {
+  description = "IAM path for auto IAM mode uploaded policies"
   default     = "/"
 }
