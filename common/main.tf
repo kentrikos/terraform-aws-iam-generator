@@ -36,4 +36,3 @@ data "template_file" "iam_policies_kops-cluster-nodes" {
     LOGS_RESOURCE             = "${local.logs_resource}"
   }
 }
-
