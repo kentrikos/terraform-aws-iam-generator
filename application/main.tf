@@ -10,7 +10,7 @@ locals {
 
 module "common_policies" {
   source               = "../common"
-  aws_account_number   = "${var.operation_aws_account_number}"
+  aws_account_number   = "${var.application_aws_account_number}"
   k8s_cluster_name     = "${local.application_cluster_name}"
   kops_state_s3_bucket = "${local.application_kops_state_s3_bucket}"
   logs_not_resource    = "${var.logs_not_resource}"
