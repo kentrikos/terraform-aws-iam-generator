@@ -53,6 +53,8 @@ Inputs are the same for `application` and `operations`.
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | application_aws_account_number | AWS application account number (without hyphens) | string | - | yes |
+| auto_IAM_mode | Create IAM Policies in AWS (default false) | string | `false` | no |
+| auto_IAM_path | IAM path for auto IAM mode uploaded policies | string | `/` | no |
 | environment_type | Type of environment (e.g. test, production) | string | `test` | no |
 | k8s_cluster_name_postfix | Domain name of Kubernetes cluster (currently only k8s.local is supported) | string | `k8s.local` | no |
 | logs_not_resource | List of resources that log police will NotResource, empty least mean that Resource * is set | list | `<list>` | no |

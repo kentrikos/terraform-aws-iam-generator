@@ -38,7 +38,7 @@ variable "logs_not_resource" {
 }
 
 variable "auto_IAM_mode" {
-  description = "Create IAM Policies in AWS(default false)"
+  description = "Create IAM Policies in AWS (default false)"
   default     = false
 }
 
