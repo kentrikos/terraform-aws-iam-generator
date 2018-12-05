@@ -4,7 +4,7 @@ variable "region" {
 }
 
 variable "aws_account_number" {
-  description = "AWS transit account number (without hyphens)"
+  description = "AWS account number (without hyphens)"
 }
 
 variable "logs_not_resource" {

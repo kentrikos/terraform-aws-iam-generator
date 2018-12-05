@@ -1,6 +1,6 @@
 # SOME COMMON NAMES:
 locals {
-  operation_cluster_name           = "${var.product_domain_name}-${var.environment_type}-ops.${var.k8s_cluster_name_postfix}"
+  operations_cluster_name          = "${var.product_domain_name}-${var.environment_type}-ops.${var.k8s_cluster_name_postfix}"
   application_cluster_name         = "${var.product_domain_name}-${var.environment_type}.${var.k8s_cluster_name_postfix}"
   application_kops_state_s3_bucket = "kops-${var.application_aws_account_number}-${var.region}-${var.product_domain_name}-${var.environment_type}"
 }
@@ -39,7 +39,7 @@ resource "local_file" "iam_policies_kops-cluster-nodes-application" {
 # SAVE LOGGING CROSS ACCOUNT POLICIES:
 resource "local_file" "allow_cross_account_logging" {
   content  = "${data.aws_iam_policy_document.allow_cross_account_application_logging.json}"
-  filename = "${var.ouputs_directory}/application/logging_kinesis_cross_account.${local.operation_cluster_name}.json"
+  filename = "${var.ouputs_directory}/application/logging_kinesis_cross_account.${local.operations_cluster_name}.json"
 }
 
 ##############################################################################
@@ -80,7 +80,7 @@ resource "aws_iam_policy" "iam_policies_kops-cluster-nodes-application" {
 
 resource "aws_iam_policy" "allow_cross_account_logging" {
   count  = "${var.auto_IAM_mode}"
-  name   = "logging_kinesis_cross_account.${local.operation_cluster_name}"
+  name   = "logging_kinesis_cross_account.${local.operations_cluster_name}"
   path   = "${var.auto_IAM_path}"
   policy = "${data.aws_iam_policy_document.allow_cross_account_application_logging.json}"
 }

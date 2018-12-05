@@ -27,7 +27,7 @@ Is handling policies that are same structured for both account types
 module "iam_operations" {
    source = "github.com/kentrikos/terrafrom-aws-iam-generator//opperations"
 
-   transit_aws_account_number      = "1111111111"
+   operations_aws_account_number   = "1111111111"
    application_aws_account_number  = "2222222222"
 
    product_domain_name = "pdname"
@@ -53,12 +53,12 @@ Inputs are the same for `application` and `operations`.
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | application_aws_account_number | AWS application account number (without hyphens) | string | - | yes |
-| auto_IAM_mode | Create IAM Policies in AWS (default false) | string | `false` | no |
+| auto_IAM_mode | Create IAM Policies in AWS | string | `false` | no |
 | auto_IAM_path | IAM path for auto IAM mode uploaded policies | string | `/` | no |
 | environment_type | Type of environment (e.g. test, production) | string | `test` | no |
 | k8s_cluster_name_postfix | Domain name of Kubernetes cluster (currently only k8s.local is supported) | string | `k8s.local` | no |
 | logs_not_resource | List of resources that log police will NotResource, empty least mean that Resource * is set | list | `<list>` | no |
-| operation_aws_account_number | AWS transit account number (without hyphens) | string | - | yes |
+| operations_aws_account_number | AWS operations account number (without hyphens) | string | - | yes |
 | ouputs_directory | Local directory where jsons will be saved | string | `outputs` | no |
 | product_domain_name | Name of product domain, will be used to create other names | string | `pdname` | no |
 | region | AWS region | string | `eu-central-1` | no |
