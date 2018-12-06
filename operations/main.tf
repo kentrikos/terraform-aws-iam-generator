@@ -1,7 +1,7 @@
 # SOME COMMON NAMES:
 locals {
   operation_cluster_name         = "${var.product_domain_name}-${var.environment_type}-ops.${var.k8s_cluster_name_postfix}"
-  operation_kops_state_s3_bucket = "kops-${var.operation_aws_account_number}-${var.region}-${var.product_domain_name}-${var.environment_type}-ops"
+  operation_kops_state_s3_bucket = "kops-${var.operations_aws_account_number}-${var.region}-${var.product_domain_name}-${var.environment_type}-ops"
 }
 
 ##############################################################################
@@ -9,7 +9,7 @@ locals {
 
 module "common_policies" {
   source               = "../common"
-  aws_account_number   = "${var.operation_aws_account_number}"
+  aws_account_number   = "${var.operations_aws_account_number}"
   k8s_cluster_name     = "${local.operation_cluster_name}"
   kops_state_s3_bucket = "${local.operation_kops_state_s3_bucket}"
   logs_not_resource    = "${var.logs_not_resource}"
