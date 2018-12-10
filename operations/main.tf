@@ -33,12 +33,12 @@ resource "local_file" "iam_policies_kops-cluster-nodes-operation" {
 
 resource "local_file" "iam_policies_logging-core-kinesis-operation" {
   content  = "${module.common_policies.iam_policies_logging-core-kinesis}"
-  filename = "${var.ouputs_directory}/operation/logging-kinesis.${local.operation_cluster_name}.json"
+  filename = "${var.ouputs_directory}/operation/logging_kinesis.${local.operation_cluster_name}.json"
 }
 
 resource "local_file" "iam_policies_logging-core-lambda-operation" {
   content  = "${module.common_policies.iam_policies_logging-core-lambda}"
-  filename = "${var.ouputs_directory}/operation/logging-lambda.${local.operation_cluster_name}.json"
+  filename = "${var.ouputs_directory}/operation/logging_lambda.${local.operation_cluster_name}.json"
 }
 
 ##############################################################################
@@ -93,14 +93,14 @@ resource "aws_iam_policy" "AssumeKopsCrossAccount" {
 
 resource "aws_iam_policy" "iam_policies_logging-core-kinesis-operation" {
   count  = "${var.auto_IAM_mode}"
-  name   = "logging-kinesis.${local.operation_cluster_name}"
+  name   = "logging_kinesis.${local.operation_cluster_name}"
   path   = "${var.auto_IAM_path}"
   policy = "${module.common_policies.iam_policies_logging-core-kinesis}"
 }
 
 resource "aws_iam_policy" "iam_policies_logging-core-lambda-operation" {
   count  = "${var.auto_IAM_mode}"
-  name   = "logging-lambda.${local.operation_cluster_name}"
+  name   = "logging_lambda.${local.operation_cluster_name}"
   path   = "${var.auto_IAM_path}"
   policy = "${module.common_policies.iam_policies_logging-core-lambda}"
 }
