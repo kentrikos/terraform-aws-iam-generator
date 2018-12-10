@@ -32,9 +32,7 @@
         "ec2:DescribeNetworkInterfaces",
         "ec2:DeleteNetworkInterface"
       ],
-      "NotResource": [
-        "arn:aws:logs:*:*:ccc-*"
-      ]
+      ${LOGS_RESOURCE}
     }
   ]
 }

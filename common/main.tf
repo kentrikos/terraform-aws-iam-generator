@@ -52,5 +52,6 @@ data "template_file" "iam_policies_logging-core-lambda" {
   vars {
     AWS_ACCOUNT_NUMBER = "${var.aws_account_number}"
     REGION             = "${var.region}"
+    LOGS_RESOURCE      = "${local.logs_resource}"
   }
 }
