@@ -36,22 +36,3 @@ data "template_file" "iam_policies_kops-cluster-nodes" {
     LOGS_RESOURCE             = "${local.logs_resource}"
   }
 }
-
-data "template_file" "iam_policies_logging-core-kinesis" {
-  template = "${file("${path.module}/iam_policies_logging-core-kinesis.tpl")}"
-
-  vars {
-    AWS_ACCOUNT_NUMBER = "${var.aws_account_number}"
-    REGION             = "${var.region}"
-  }
-}
-
-data "template_file" "iam_policies_logging-core-lambda" {
-  template = "${file("${path.module}/iam_policies_logging-core-lambda.tpl")}"
-
-  vars {
-    AWS_ACCOUNT_NUMBER = "${var.aws_account_number}"
-    REGION             = "${var.region}"
-    LOGS_RESOURCE      = "${local.logs_resource}"
-  }
-}

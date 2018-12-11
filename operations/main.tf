@@ -16,6 +16,25 @@ module "common_policies" {
   region               = "${var.region}"
 }
 
+data "template_file" "iam_policies_logging-core-kinesis" {
+  template = "${file("${path.module}/iam_policies_logging-core-kinesis.tpl")}"
+
+  vars {
+    AWS_ACCOUNT_NUMBER = "${var.operations_aws_account_number}"
+    REGION             = "${var.region}"
+  }
+}
+
+data "template_file" "iam_policies_logging-core-lambda" {
+  template = "${file("${path.module}/iam_policies_logging-core-lambda.tpl")}"
+
+  vars {
+    AWS_ACCOUNT_NUMBER = "${var.operations_aws_account_number}"
+    REGION             = "${var.region}"
+    LOGS_RESOURCE      = "${length(var.logs_not_resource) != 0 ? "\"NotResource\": ${jsonencode(var.logs_not_resource)}" : "\"Resource\": [\"*\"]"}"
+  }
+}
+
 resource "local_file" "iam_policies_kops-cluster-masters-operation" {
   content  = "${module.common_policies.iam_policies_kops-cluster-masters}"
   filename = "${var.ouputs_directory}/operation/masters.${local.operation_cluster_name}.json"
@@ -32,12 +51,12 @@ resource "local_file" "iam_policies_kops-cluster-nodes-operation" {
 }
 
 resource "local_file" "iam_policies_logging-core-kinesis-operation" {
-  content  = "${module.common_policies.iam_policies_logging-core-kinesis}"
+  content  = "${data.template_file.iam_policies_logging-core-kinesis.rendered}"
   filename = "${var.ouputs_directory}/operation/logging_kinesis.${local.operation_cluster_name}.json"
 }
 
 resource "local_file" "iam_policies_logging-core-lambda-operation" {
-  content  = "${module.common_policies.iam_policies_logging-core-lambda}"
+  content  = "${data.template_file.iam_policies_logging-core-kinesis.rendered}"
   filename = "${var.ouputs_directory}/operation/logging_lambda.${local.operation_cluster_name}.json"
 }
 
@@ -95,12 +114,12 @@ resource "aws_iam_policy" "iam_policies_logging-core-kinesis-operation" {
   count  = "${var.auto_IAM_mode}"
   name   = "logging_kinesis.${local.operation_cluster_name}"
   path   = "${var.auto_IAM_path}"
-  policy = "${module.common_policies.iam_policies_logging-core-kinesis}"
+  policy = "${data.template_file.iam_policies_logging-core-kinesis.rendered}"
 }
 
 resource "aws_iam_policy" "iam_policies_logging-core-lambda-operation" {
   count  = "${var.auto_IAM_mode}"
   name   = "logging_lambda.${local.operation_cluster_name}"
   path   = "${var.auto_IAM_path}"
-  policy = "${module.common_policies.iam_policies_logging-core-lambda}"
+  policy = "${data.template_file.iam_policies_logging-core-lambda.rendered}"
 }
