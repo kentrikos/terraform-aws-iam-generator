@@ -25,7 +25,7 @@ Is handling policies that are same structured for both account types
 
 ```hcl
 module "iam_operations" {
-   source = "github.com/kentrikos/terrafrom-aws-iam-generator//opperations"
+   source = "github.com/kentrikos/terrafrom-aws-iam-generator/operations"
 
    operations_aws_account_number   = "1111111111"
    application_aws_account_number  = "2222222222"
@@ -35,7 +35,7 @@ module "iam_operations" {
 }
 
 module "iam_application" {
-   source = "github.com/kentrikos/terrafrom-aws-iam-generator//application"
+   source = "github.com/kentrikos/terrafrom-aws-iam-generator/application"
 
    transit_aws_account_number      = "1111111111"
    application_aws_account_number  = "2222222222"
