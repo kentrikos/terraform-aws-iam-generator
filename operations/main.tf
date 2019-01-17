@@ -34,7 +34,7 @@ resource "local_file" "iam_policies_kops-cluster-nodes-operation" {
 ##############################################################################
 # SAVE CROSS-ACCOUNT POLICY:
 resource "local_file" "AssumeCrossAccount" {
-  content  = "${data.aws_iam_policy_document.AssumeKopsCrossAccount.json}"
+  content  = "${data.aws_iam_policy_document.AssumeCrossAccount.json}"
   filename = "${var.ouputs_directory}/operation/KENTRIKOS_${var.region}.${var.product_domain_name}-${var.environment_type}_AssumeCrossAccount.json"
 }
 
@@ -78,5 +78,5 @@ resource "aws_iam_policy" "AssumeCrossAccount" {
   count  = "${var.auto_IAM_mode}"
   name   = "KENTRIKOS_${var.region}.${var.product_domain_name}-${var.environment_type}_AssumeCrossAccount"
   path   = "${var.auto_IAM_path}"
-  policy = "${data.aws_iam_policy_document.AssumeKopsCrossAccount.json}"
+  policy = "${data.aws_iam_policy_document.AssumeCrossAccount.json}"
 }
