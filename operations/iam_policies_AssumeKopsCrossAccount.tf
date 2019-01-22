@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "AssumeCrossAccount" {
     ]
 
     resources = [
-      "arn:aws:iam::${var.application_aws_account_number}:role/${var.region}_${var.product_domain_name}_${var.environment_type}_CrossAccount",
+      "arn:aws:iam::${var.application_aws_account_number}:role/KENTRIKOS_${var.region}_${var.product_domain_name}_${var.environment_type}_CrossAccount",
     ]
   }
 }
