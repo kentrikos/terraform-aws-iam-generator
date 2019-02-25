@@ -1,6 +1,6 @@
 # SOME COMMON NAMES:
 locals {
-  operation_cluster_name         = "${var.product_domain_name}-${var.environment_type}-ops.${var.k8s_cluster_name_postfix}"
+  operation_cluster_name         = "${var.region}-${var.product_domain_name}-${var.environment_type}-ops.${var.k8s_cluster_name_postfix}"
   operation_kops_state_s3_bucket = "kops-${var.operations_aws_account_number}-${var.region}-${var.product_domain_name}-${var.environment_type}-ops"
 }
 
@@ -33,9 +33,9 @@ resource "local_file" "iam_policies_kops-cluster-nodes-operation" {
 
 ##############################################################################
 # SAVE CROSS-ACCOUNT POLICY:
-resource "local_file" "AssumeKopsCrossAccount" {
-  content  = "${data.aws_iam_policy_document.AssumeKopsCrossAccount.json}"
-  filename = "${var.ouputs_directory}/operation/AssumeKopsCrossAccount.json"
+resource "local_file" "AssumeCrossAccount" {
+  content  = "${data.aws_iam_policy_document.AssumeCrossAccount.json}"
+  filename = "${var.ouputs_directory}/operation/KENTRIKOS_${var.region}.${var.product_domain_name}-${var.environment_type}_AssumeCrossAccount.json"
 }
 
 ##############################################################################
@@ -74,9 +74,9 @@ resource "aws_iam_policy" "iam_policies_kops-cluster-nodes-operation" {
   policy = "${module.common_policies.iam_policies_kops-cluster-nodes}"
 }
 
-resource "aws_iam_policy" "AssumeKopsCrossAccount" {
+resource "aws_iam_policy" "AssumeCrossAccount" {
   count  = "${var.auto_IAM_mode}"
-  name   = "AssumeKopsCrossAccount"
+  name   = "KENTRIKOS_${var.region}.${var.product_domain_name}-${var.environment_type}_AssumeCrossAccount"
   path   = "${var.auto_IAM_path}"
-  policy = "${data.aws_iam_policy_document.AssumeKopsCrossAccount.json}"
+  policy = "${data.aws_iam_policy_document.AssumeCrossAccount.json}"
 }
