@@ -1,7 +1,7 @@
 provider "local" {
-  version = " ~> v1.1.0"
+  version = " ~> v1.2.0"
 }
 
 provider "template" {
-  version = " ~> v1.0.0"
+  version = " ~> v2.1.0"
 }
