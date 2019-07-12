@@ -34,7 +34,7 @@ variable "ouputs_directory" {
 variable "logs_not_resource" {
   description = "List of resources that log police will NotResource, empty least mean that Resource * is set"
   default     = []
-  type        = "list"
+  type        = list(string)
 }
 
 variable "auto_IAM_mode" {
@@ -46,3 +46,4 @@ variable "auto_IAM_path" {
   description = "IAM path for auto IAM mode uploaded policies"
   default     = "/"
 }
+
