@@ -5,6 +5,10 @@ This modules will generate locally json files with IAM policies.
 Policies then needed to be created manually.
 For convenience, all policies + text file with description are stored in a single local directory.
 
+# Notes
+
+Terraform version  `>= 0.12`
+
 ## Structure
 
 Module is diveded into 2 useable submodules to be used as `application` and `operations` with additional `common` folder, where shared part is stored.
